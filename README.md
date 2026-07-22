@@ -1,98 +1,83 @@
+# AI Agent Nest.js Project
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+본 프로젝트는 조현영 지음의 **"Node.js Nest.js 교과서"** 책을 기반으로 학습하고 개발하는 NestJS 백엔드 애플리게이션입니다. 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 📚 학습 및 참고 도서
+- **도서명**: Node.js Nest.js 교과서
+- **저자**: 조현영 지음
+- **목적**: NestJS의 구조적 설계 방식을 학습하고, 이를 활용하여 AI Agent 기능을 제공하는 웹 서버를 구축합니다.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🛠️ 기술 스택
+- **Backend**: NestJS (v10.x+)
+- **Language**: TypeScript
+- **Runtime**: Node.js
+- **Configuration**: `@nestjs/config`
+- **Environment Management**: `.env`
 
+---
+
+## 📁 프로젝트 구조
+```text
+src/
+├── ai/                 # AI 관련 서비스 및 프로바이더를 담당하는 모듈
+│   ├── interfaces/     # 인터페이스 정의
+│   ├── providers/      # AI 연동을 위한 상세 프로바이더 구현
+│   ├── ai.module.ts    # AI 모듈 정의
+│   └── ai.service.ts   # AI 비즈니스 로직
+├── config/             # 환경 변수 및 설정 파일을 관리하는 모듈
+│   └── configuration.ts
+├── app.controller.ts   # 메인 컨트롤러
+├── app.module.ts       # 루트 애플리게이션 모듈
+├── app.service.ts      # 루트 서비스
+└── main.ts             # 애플리게이션 진입점
+```
+
+---
+
+## 🚀 시작하기
+
+### 1. 의존성 패키지 설치
 ```bash
 $ npm install
 ```
 
-## Compile and run the project
+### 2. 환경 변수 설정
+프로젝트 루트 디렉토리에 `.env` 파일을 생성하고 필요한 환경 변수 설정을 추가합니다. (예: API 키, 포트 번호 등)
+```env
+PORT=3000
+# AI 관련 환경 변수 설정 추가
+```
 
+### 3. 애플리게이션 실행
 ```bash
-# development
-$ npm run start
-
-# watch mode
+# 개발 모드 (Hot-reload 활성화)
 $ npm run start:dev
 
-# production mode
+# 프로덕션 빌드
+$ npm run build
+
+# 프로덕션 모드 실행
 $ npm run start:prod
 ```
 
-## Run tests
-
+### 4. 테스트 실행
 ```bash
-# unit tests
+# 유닛 테스트
 $ npm run test
 
-# e2e tests
+# e2e 테스트
 $ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 📄 라이선스
+This project is licensed under the MIT License.
