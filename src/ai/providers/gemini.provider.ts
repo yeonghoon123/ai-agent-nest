@@ -51,6 +51,7 @@ export class GeminiProvider implements IAIProvider {
         messages: AIMessage[],
         options?: AIGenerateOptions,
     ): AsyncIterable<string> {
+        console.log(messages)
         const { textStream } = streamText({
             model: this.gemini(this.model),
             messages: messages.map((msg) => ({

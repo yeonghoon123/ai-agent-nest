@@ -11,18 +11,18 @@ import {
 
 @Injectable()
 export class ClaudeProvider implements IAIProvider {
-    private antrophic;
+    private anthropic;
     private model: string;
 
     constructor(private configService: ConfigService) {
-        const apiKey = this.configService.get<string>('antrophic.apiKey')
-        this.model = this.configService.get<string>('antrophic.model') || 'claude-sonet-4-6';
+        const apiKey = this.configService.get<string>('anthropic.apiKey')
+        this.model = this.configService.get<string>('anthropic.model') || 'claude-sonet-4-6';
 
         if (!apiKey) {
-            throw new Error('openAI API Key Not setting')
+            throw new Error('anthropic API Key Not setting')
         }
 
-        this.antrophic = createAnthropic({
+        this.anthropic = createAnthropic({
             apiKey,
         });
     }
@@ -32,7 +32,7 @@ export class ClaudeProvider implements IAIProvider {
         options?: AIGenerateOptions,
     ): Promise<AIResponse> {
         const { text } = await generateText({
-            model: this.antrophic(this.model),
+            model: this.anthropic(this.model),
             messages: messages.map((msg) => ({
                 role: msg.role,
                 content: msg.content
@@ -52,7 +52,7 @@ export class ClaudeProvider implements IAIProvider {
         options?: AIGenerateOptions,
     ): AsyncIterable<string> {
         const { textStream } = streamText({
-            model: this.antrophic(this.model),
+            model: this.anthropic(this.model),
             messages: messages.map((msg) => ({
                 role: msg.role,
                 content: msg.content

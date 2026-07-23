@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { withRetry } from 'src/utils/retry';
 import { OpenAIProvider } from './providers/openai.provider';
 import { GeminiProvider } from './providers/gemini.provider';
 import { ClaudeProvider } from './providers/claude.provider';
@@ -13,6 +14,7 @@ import {
 
 @Injectable()
 export class AiService {
+    private readonly logger = new Logger(AiService.name);
     private providers: Map<string, IAIProvider> = new Map();
     private defaultProvider: string;
 
@@ -48,6 +50,15 @@ export class AiService {
     ): AsyncIterable<string> {
         const selectedProvider = this.getProvider(provider);
         yield* selectedProvider.streamText(messages, options);
+        return withRetry(
+            () => selectedProvider.generateText(messages, options),
+            {
+                maxRetries: 3,
+                initialDelayMs: 1000,
+                maxDelayMs: 30000
+            },
+            this.logger,
+        )
     }
 
     private getProvider(providerName?: string): IAIProvider {

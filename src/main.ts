@@ -1,12 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express'
+import { ValidationPipe } from '@nestjs/common';
 import { join } from 'node:path'
 import * as nunjucks from 'nunjucks'
 
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    })
+  )
 
   // nunjucks setting
   const viewsPath = join(__dirname, '..', 'views');
